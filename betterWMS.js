@@ -16,15 +16,18 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
       var url = this.getFeatureInfoUrl(evt.latlng),
           showResults = L.Util.bind(this.showGetFeatureInfo, this);
       $.ajax({
-        url: url,
-        success: function (data, status, xhr) {
-          var err = typeof data === 'string' ? null : data;
+      url: url,
+      success: function (data, status, xhr) {
+        var err = typeof data === 'string' ? null : data;
+        //Fix for blank popup window
+        var doc = (new DOMParser()).parseFromString(data, "text/html"); 
+        if (doc.body.innerHTML.trim().length > 0)
           showResults(err, evt.latlng, data);
-        },
-        error: function (xhr, status, error) {
-          showResults(error);  
-        }
-      });
+      },
+      error: function (xhr, status, error) {
+        showResults(error);
+      }
+    });
     },
     
     getFeatureInfoUrl: function (latlng) {
