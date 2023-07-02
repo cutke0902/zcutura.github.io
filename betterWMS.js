@@ -1,13 +1,12 @@
 L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
   
     onAdd: function (map) {
-  
       L.TileLayer.WMS.prototype.onAdd.call(this, map);
       map.on('click', this.getFeatureInfo, this);
     },
     
     onRemove: function (map) {
-   
+     
       L.TileLayer.WMS.prototype.onRemove.call(this, map);
       map.off('click', this.getFeatureInfo, this);
     },
@@ -29,7 +28,8 @@ L.TileLayer.BetterWMS = L.TileLayer.WMS.extend({
     },
     
     getFeatureInfoUrl: function (latlng) {
-            var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
+    
+      var point = this._map.latLngToContainerPoint(latlng, this._map.getZoom()),
           size = this._map.getSize(),
           
           params = {

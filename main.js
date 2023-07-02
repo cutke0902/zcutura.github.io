@@ -1,9 +1,11 @@
 
   var map = L.map('map').setView([44, 15],7);
-  var url = 'http://services.bioportal.hr:80/dzzpnpis/ows?SERVICE=WMS&';
-  var url1 = 'http://services.bioportal.hr/inspire/geos1/ps-m/ows?SERVICE=WMS&';
+  var url = 'https://services.bioportal.hr/dzzpnpis/ows?SERVICE=WMS&';
+  var url1 = 'https://services.bioportal.hr/dzzpnpis/ows?SERVICE=WMS&';
   var url2 = 'http://services.bioportal.hr:80/dzzpnpis/ows?SERVICE=WMS& ';
   var url3 = 'http://services.bioportal.hr:80/dzzpnpis/ows?SERVICE=WMS& ';
+  var url4 = ' https://services.bioportal.hr/dzzpnpis/ows?SERVICE=WMS& ';
+  
   
   var osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 10,
@@ -25,23 +27,23 @@ var wms1=L.tileLayer.betterWms(url, {
       
    
       
-   var wms2=   L.tileLayer.betterWms(url1, {
-        layers: 'PS.ProtectedSitesNationalPark',
+   var wms2=  L.tileLayer.betterWms(url1,{
+    layers:'world_heritage',
         transparent: true,
-        format: 'image/png',
-	propertyName: "site_name2"
+        format: 'image/png'
       }).addTo(map);
-
-
       var wms3=   L.tileLayer.betterWms(url2, {
         layers: 'ronjenje_tocke',
         transparent: true,
         format: 'image/png'
       }).addTo(map);
-
-
       var wms4=   L.tileLayer.betterWms(url3, {
         layers: 'atrakcije_linije',
+        transparent: true,
+        format: 'image/png'
+      }).addTo(map);
+      var wms5=   L.tileLayer.betterWms(url4, {
+        layers: 'vodjene_ture',
         transparent: true,
         format: 'image/png'
       }).addTo(map);
@@ -55,7 +57,8 @@ var overlayMaps = {
 "Dinosauri":wms1,
 "Nacionalni parkovi":wms2,
 "Ronjenje":wms3,
-"Atrakcije":wms4
+"Atrakcije":wms4,
+"Vođene ture":wms5
 };
 L.control.layers(baseMaps, overlayMaps).addTo(map);
 
